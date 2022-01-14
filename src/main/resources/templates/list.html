@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+	<title>Pizza List</title>
+
+</head>
+
+<body>
+
+<div class="container">
+	<div class="text-center mb-3">
+
+	<h1>Pizze</h1>
+
+	<a class="btn btn-primary" th:href="@{/pizze/create}"><i class="fas fa-plus"></i> Aggiungi una pizza</a>
+	</div >
+</div >
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Descrizione</th>
+					<th>Ingredienti</th>
+					<th>Prezzo</th>
+					<th>Opzioni</th >
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="pizza : ${pizzaList}">
+					<td th:text="${pizza.nome}"></td>
+					<td th:text="${pizza.descrizione}"></td>
+					<td class="d-flex" th:each="ing : ${pizza.getIngredienti()}" th:text="${ing.nome}"></td >
+					<td th:text="${pizza.prezzo}"></td>
+					<td><a class="btn btn-primary" th:href="@{|/pizze/edit/${pizza.id}|}">Modifica</a>
+					<td><a class="btn btn-primary" th:href="@{|/pizze/delete/${pizza.id}|}" onclick="return confirm('Confermare?')">Elimina</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
